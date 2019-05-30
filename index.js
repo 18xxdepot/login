@@ -52,7 +52,7 @@ app.get('/user', (req, res) => {
 app.get('/logout', (req, res) => {
     let redirect = req.query.redirect || req.get('Referrer') || "https://18xxdepot.com/";
 
-    res.clearCookie(cookie);
+    res.clearCookie(cookie, { domain: process.env.NODE_ENV === "production" ? "18xxdepot.com" : "localhost" });
     res.redirect(redirect);
 });
 
