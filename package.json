@@ -1,0 +1,10 @@
+{
+  "name": "login",
+  "version": "0.0.1",
+  "description": "Login service for 18xxdepot",
+  "main": "index.js",
+  "repository": "https://github.com/18xxdepot/login.git",
+  "author": "Christopher Giroir <kelsin@valefor.com>",
+  "license": "MIT",
+  "private": true
+}
