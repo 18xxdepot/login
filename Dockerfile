@@ -5,17 +5,16 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 
-USER node
-RUN mkdir -p /home/node/login
-WORKDIR /home/node/login
+RUN mkdir -p /usr/app
+WORKDIR /usr/app
 
-COPY package.json /home/node/login
-COPY yarn.lock /home/node/login
+COPY package.json /usr/app
+COPY yarn.lock /usr/app
 
 RUN yarn
 
-COPY . /home/node/login
-RUN mkdir -p /home/node/login/keys
+COPY . /usr/app
+RUN mkdir -p /usr/app/keys
 
 ENTRYPOINT ["yarn"]
 CMD ["start"]
