@@ -15,6 +15,7 @@ COPY yarn.lock /home/node/login
 RUN yarn
 
 COPY . /home/node/login
+RUN mkdir -p /home/node/login/keys
 
 ENTRYPOINT ["yarn"]
 CMD ["start"]
