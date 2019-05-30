@@ -19,6 +19,8 @@ const cookie = "jwt_token";
 passport.use(new SlackStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
+    tokenURL: "https://cardboardklatch.slack.com/api/oauth.access",
+    authorizationURL: "https://cardboardklatch.slack.com/oauth/authorize",
     callbackURL: process.env.NODE_ENV === "production" ? "https://login.18xxdepot.com/auth/slack/callback" : "http://localhost:3000/auth/slack/callback",
 }, (accessToken, refreshToken, profile, done) => done(null, profile)));
 
