@@ -34,6 +34,10 @@ app.get('/', (req, res) => {
     res.redirect(`/auth/slack?${qs.encode({ redirect })}`);
 });
 
+app.get('/headers', (req, res) => {
+    res.json(req.headers);
+});
+
 app.get('/user', (req, res) => {
     let token = req.cookies[cookie];
     let user = false;
