@@ -7,6 +7,9 @@
   "author": "Christopher Giroir <kelsin@valefor.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "node ./index.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "passport": "^0.4.0",
