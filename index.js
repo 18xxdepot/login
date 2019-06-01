@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const qs = require('querystring');
 
-const SlackStrategy = require('passport-slack-oauth2').Strategy;
+const Slack = require('./slack');
 
 const app = express();
 
@@ -16,13 +16,7 @@ const public = fs.readFileSync('./keys/login.public.pem');
 
 const cookie = "jwt_token";
 
-passport.use(new SlackStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    tokenURL: "https://cardboardklatch.slack.com/api/oauth.access",
-    authorizationURL: "https://cardboardklatch.slack.com/oauth/authorize",
-    callbackURL: process.env.NODE_ENV === "production" ? "https://login.18xxdepot.com/auth/slack/callback" : "http://localhost:3000/auth/slack/callback",
-}, (accessToken, refreshToken, profile, done) => done(null, profile)));
+passport.use(new Slack());
 
 app.disable('x-powered-by');
 app.use(cookieParser())
@@ -36,6 +30,11 @@ app.get('/', (req, res) => {
 
 app.get('/headers', (req, res) => {
     res.json(req.headers);
+});
+
+app.get('/token', (req, res) => {
+    let token = req.cookies[cookie];
+    res.send(token);
 });
 
 app.get('/user', (req, res) => {
