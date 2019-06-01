@@ -13,7 +13,7 @@ class Slack extends OAuth2Strategy {
 
         super(options, (at, rt, profile, done) => done(null, profile));
 
-        this.profileUrl = "https://slack.com/api/users.info?token=";
+        this.profileUrl = "https://slack.com/api/users.identity?token=";
         this.name = 'Slack';
     }
 
