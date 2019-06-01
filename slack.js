@@ -7,10 +7,9 @@ class Slack extends OAuth2Strategy {
             clientSecret: process.env.CLIENT_SECRET,
             tokenURL: "https://cardboardklatch.slack.com/api/oauth.access",
             authorizationURL: "https://cardboardklatch.slack.com/oauth/authorize",
-            scope: ['users:read', 'users:read.email'],
+            scope: ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team'],
             callbackURL: process.env.NODE_ENV === "production" ? "https://login.18xxdepot.com/auth/slack/callback" : "http://localhost:3000/auth/slack/callback",
         };
-        // ['identity.basic', 'identity.email', 'identity.avatar', 'identity.team']
 
         super(options, (at, rt, profile, done) => done(null, profile));
 
