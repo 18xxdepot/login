@@ -72,22 +72,10 @@ app.get('/auth/slack', (req, res, next) => {
 app.get('/auth/slack/callback',
         passport.authenticate('Slack', { session: false, failureRedirect: '/login' }),
         (req, res) => {
-            let user = req.user.user;
-            let [first, ...rest] = user.name.split(" ");
-            let last = rest.join(" ");
-
             let data = {
                 iss: "18xxdepot.com",
-                sub: user.email,
-                slack: user,
-                user_info: {
-                    user_login: user.email,
-                    user_name: user.name,
-                    first_name: first,
-                    last_name: last,
-                    user_email: user.email,
-                    user_roles: []
-                }
+                sub: req.user.user.email,
+                slack: req.user.user
             };
 
             let token = jwt.sign(data, private, { algorithm: 'RS256' });
